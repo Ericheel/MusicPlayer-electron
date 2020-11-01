@@ -1,4 +1,5 @@
 const { BrowserWindow } = require('electron')
+
 class AppWindow extends BrowserWindow {
     constructor(config, fileLocation) {
         const basicConfig = {
@@ -19,4 +20,4 @@ class AppWindow extends BrowserWindow {
     }
 }
 
-module.exports = AppWindow
+module.exports = { AppWindow }
