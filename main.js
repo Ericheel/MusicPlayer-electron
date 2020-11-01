@@ -8,18 +8,21 @@ const store = new DataStore()
 app.on('ready', () => {
     const mainWindow = new AppWindow({}, './renderer/index.html')
 
+    mainWindow.webContents.on('did-finish-load', () => {
+        mainWindow.send('getTracks',store.getTracks())
+    })
+
     ipcMain.on('add-music-window', (event, arg) => {
         const addMusicWindow = new AppWindow({
             width: 640,
             height: 480,
-            parent: mainWindow,
-            modal: true //模态框
+            parent: mainWindow
         }, './renderer/addMusic.html')
     })
 
     ipcMain.on('add-tracks', (event, tracks) => {
         const updatedTracks = store.addTracks(tracks).getTracks()
-        console.log(updatedTracks);
+        mainWindow.send('getTracks', updatedTracks)
     })
 
     ipcMain.on('open-music-file', (event, arg) => {
