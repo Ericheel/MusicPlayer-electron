@@ -1,5 +1,5 @@
 const Store = require('electron-store')
-const uuidv4 = require('uuid/v4')
+const uuid = require('uuid')
 const path = require('path')
 
 class DataStore extends Store {
@@ -21,7 +21,7 @@ class DataStore extends Store {
     addTracks(tracks) {
         const tracksWithProps = tracks.map(track => {
             return {
-                id: uuidv4(),
+                id: uuid.v4(),
                 path: track,
                 fileName: path.basename(track)
             }

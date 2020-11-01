@@ -1,8 +1,9 @@
 const { app, ipcMain, BrowserWindow, dialog } = require('electron')
 const { AppWindow } = require('./class/AppWindow')
-const Store = require('electron-store')
+const DataStore = require('./class/MusicDataStore')
+
 //electron提供的持久化工具
-const store = new Store()
+const store = new DataStore()
 
 app.on('ready', () => {
     const mainWindow = new AppWindow({}, './renderer/index.html')
@@ -14,6 +15,11 @@ app.on('ready', () => {
             parent: mainWindow,
             modal: true //模态框
         }, './renderer/addMusic.html')
+    })
+
+    ipcMain.on('add-tracks', (event, tracks) => {
+        const updatedTracks = store.addTracks(tracks).getTracks()
+        console.log(updatedTracks);
     })
 
     ipcMain.on('open-music-file', (event, arg) => {
