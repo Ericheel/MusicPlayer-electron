@@ -1,0 +1,17 @@
+{
+  "dependencies": {
+    "bootstrap": "^4.5.3",
+    "electron": "^10.1.5",
+    "nodemon": "^2.0.6"
+  },
+  "name": "music-player",
+  "version": "1.0.0",
+  "description": "music player",
+  "main": "main.js",
+  "devDependencies": {},
+  "scripts": {
+    "start": "nodemon --watch main.js --exec electron ."
+  },
+  "author": "lixiang",
+  "license": "ISC"
+}
