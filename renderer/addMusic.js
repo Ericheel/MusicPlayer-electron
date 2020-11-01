@@ -24,7 +24,7 @@ const renderListHTML = (pathes) => {
 }
 
 ipcRenderer.on('selected-file', (event, path) => {
-    if (Array.isArray(path)) {
+    if (Array.isArray(path) && path.length > 0) {
         renderListHTML(path)
         musicFilesPath = path
     }
