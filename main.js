@@ -1,17 +1,15 @@
 const { app, BrowserWindow, ipcMain } = require('electron')
+const AppWindow = require('./class/AppWindow')
+
 
 app.on('ready', () => {
-    const mainWindow = new BrowserWindow({
-        width: 800,
-        height: 600,
-        webPreferences: {
-            nodeIntegration: true
-        },
-        show: false
-    })
+    const mainWindow = new AppWindow({}, './renderer/index.html')
 
-    mainWindow.loadFile('./renderer/index.html')
-    mainWindow.once('ready-to-show', () => {
-        mainWindow.show()
+    ipcMain.on('add-music-window', (event, arg) => {
+        const addMusicWindow = new AppWindow({
+            width: 480,
+            height: 320,
+            parent: mainWindow
+        }, './renderer/addMusic.html')
     })
 })
