@@ -1,6 +1,8 @@
 const { app, ipcMain, BrowserWindow, dialog } = require('electron')
 const { AppWindow } = require('./class/AppWindow')
-
+const Store = require('electron-store')
+//electron提供的持久化工具
+const store = new Store()
 
 app.on('ready', () => {
     const mainWindow = new AppWindow({}, './renderer/index.html')
@@ -9,7 +11,8 @@ app.on('ready', () => {
         const addMusicWindow = new AppWindow({
             width: 640,
             height: 480,
-            parent: mainWindow
+            parent: mainWindow,
+            modal: true //模态框
         }, './renderer/addMusic.html')
     })
 
@@ -17,7 +20,7 @@ app.on('ready', () => {
         dialog.showOpenDialog({
             properties: ['openFile', 'multiSelections'],
             filters: [{ name: 'Music', extensions: ['mp3'] }]
-        }).then(files => {
+        }).then(files => { //electron dialog 新版使用 promise，callback失效
             if (files) {
                 event.sender.send('selected-file', files.filePaths)
             }

@@ -2,7 +2,9 @@
   "dependencies": {
     "bootstrap": "^4.5.3",
     "electron": "^10.1.5",
-    "nodemon": "^2.0.6"
+    "electron-store": "^6.0.1",
+    "nodemon": "^2.0.6",
+    "uuid": "^8.3.1"
   },
   "name": "music-player",
   "version": "1.0.0",

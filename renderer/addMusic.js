@@ -8,6 +8,7 @@ $('select-music').addEventListener('click', () => {
 
 const renderListHTML = (pathes) => {
     const musicList = $('musicList')
+    //es6 reduce API
     const musicItemsHTML = pathes.reduce((html, music) => {
         html += `<li class='list-group-item'>${path.basename(music)}</li>`
         return html
