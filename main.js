@@ -33,7 +33,7 @@ app.on('ready', () => {
     ipcMain.on('open-music-file', (event, arg) => {
         dialog.showOpenDialog({
             properties: ['openFile', 'multiSelections'],
-            filters: [{ name: 'Music', extensions: ['mp3'] }]
+            filters: [{ name: 'Music', extensions: ['mp3', 'wav', 'ogg', 'mp4'] }]
         }).then(files => { //electron dialog 新版使用 promise，callback失效
             if (files) {
                 event.sender.send('selected-file', files.filePaths)
